@@ -1,4 +1,4 @@
-# 🔁 Flask Echo Server
+# 🔁 **Flask Echo Server**
 
 A lightweight, production-ready Echo Server built with Flask, Pydantic v2, and Redis. It receives GET and POST requests,
 validates input using Pydantic, tracks request count using Redis, and echoes back the data.
@@ -17,7 +17,7 @@ validates input using Pydantic, tracks request count using Redis, and echoes bac
 
 ## 📦 Requirements
 
-- Python 3.9+
+- Python 3.10+
 - Redis (local or remote)
 - `pip` or `poetry` for dependency management
 
@@ -25,7 +25,7 @@ validates input using Pydantic, tracks request count using Redis, and echoes bac
 
 ## 📥 Installation
 
-Clone this repository or copy the single-file server code. 
+Clone this repository or copy the single-file server code.
 Then install the dependencies:
 
 ```bash
@@ -36,50 +36,28 @@ By default, the app runs on http://localhost:5000.
 
 ## 🧪 Example Requests
 
-### ✅ GET (via browser or curl)
+
+### ✅ Form Data
 
 ```bash
-http://localhost:5000/echo?name=Alice&age=30
+curl -X POST http://localhost:5000/echo -F "name=Alice" -F "age=30"
 ```
 
-### ✅ POST (via browser or curl)
+### ✅ JSON 
 
 ```bash
-curl -X POST http://localhost:5000/echo \
-     -H "Content-Type: application/json" \
-     -d '{"name": "Alice", "age": 30}'
+curl -X POST http://localhost:5000/echo -H "Content-Type: application/json" -d '{"name": "Alice", "age": 30}'
 ```
 
-### ✅ Form Data (via browser or curl)
-
-```bash
-curl -X POST http://localhost:5000/echo \
-     -F "name=Alice" \
-     -F "age=30"
+## Response
+```json
+{
+    "echo": {
+        "my name": "Anna"
+    },
+    "request_number": 5
+}
 ```
-
-### ✅ JSON (via browser or curl)
-
-```bash
-curl -X POST http://localhost:5000/echo \
-     -H "Content-Type: application/json" \
-     -d '{"name": "Alice", "age": 30}'
-```
-
-### 🧯 Troubleshooting
-
-**Redis errors (e.g. connection refused):**
-Ensure Redis is running on localhost:6379 or set custom values using REDIS_HOST and REDIS_PORT environment variables.
-
-**Docker error on Windows:**
-If you get open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified., ensure Docker Desktop is
-running.
-
-**Flask not starting:**
-Check that no other process is using port 5000, or change the port in app.py.
-
-**Invalid JSON payload:**
-Confirm the JSON body is valid and Content-Type header is set correctly to application/json.
 
 ### 📄 License
 
